@@ -1,30 +1,30 @@
 type AnticipatorConfig = {
-  columnSize: number;
-  minToAnticipate: number;
-  maxToAnticipate: number;
-  anticipateCadence: number;
-  defaultCadence: number;
+	columnSize: number;
+	minToAnticipate: number;
+	maxToAnticipate: number;
+	anticipateCadence: number;
+	defaultCadence: number;
 };
 
 type SlotCoordinate = {
-  column: number;
-  row: number;
+	column: number;
+	row: number;
 };
 
 type SpecialSymbol = { specialSymbols: Array<SlotCoordinate> };
 
 type RoundsSymbols = {
-  roundOne: SpecialSymbol;
-  roundTwo: SpecialSymbol;
-  roundThree: SpecialSymbol;
+	roundOne: SpecialSymbol;
+	roundTwo: SpecialSymbol;
+	roundThree: SpecialSymbol;
 };
 
 type SlotCadence = Array<number>;
 
 type RoundsCadences = {
-  roundOne: SlotCadence;
-  roundTwo: SlotCadence;
-  roundThree: SlotCadence;
+	roundOne: SlotCadence;
+	roundTwo: SlotCadence;
+	roundThree: SlotCadence;
 };
 
 /**
@@ -36,42 +36,46 @@ type RoundsCadences = {
  * @param defaultCadence It's the cadence value when don't has anticipation.
  */
 const anticipatorConfig: AnticipatorConfig = {
-  columnSize: 5,
-  minToAnticipate: 2,
-  maxToAnticipate: 3,
-  anticipateCadence: 2,
-  defaultCadence: 0.25,
+	columnSize: 5,
+	minToAnticipate: 2,
+	maxToAnticipate: 3,
+	anticipateCadence: 2,
+	defaultCadence: 0.25,
 };
 
 /**
  * Game rounds with special symbols position that must be used to generate the SlotCadences.
  */
 const gameRounds: RoundsSymbols = {
-  roundOne: {
-    specialSymbols: [
-      { column: 0, row: 2 },
-      { column: 1, row: 3 },
-      { column: 3, row: 4 },
-    ],
-  },
-  roundTwo: {
-    specialSymbols: [
-      { column: 0, row: 2 },
-      { column: 0, row: 3 },
-    ],
-  },
-  roundThree: {
-    specialSymbols: [
-      { column: 4, row: 2 },
-      { column: 4, row: 3 },
-    ],
-  },
+	roundOne: {
+		specialSymbols: [
+			{ column: 0, row: 2 },
+			{ column: 1, row: 3 },
+			{ column: 3, row: 4 },
+		],
+	},
+	roundTwo: {
+		specialSymbols: [
+			{ column: 0, row: 2 },
+			{ column: 0, row: 3 },
+		],
+	},
+	roundThree: {
+		specialSymbols: [
+			{ column: 4, row: 2 },
+			{ column: 4, row: 3 },
+		],
+	},
 };
 
 /**
  * This must be used to get all game rounds cadences.
  */
-const slotMachineCadences: RoundsCadences = { roundOne: [], roundTwo: [], roundThree: [] };
+const slotMachineCadences: RoundsCadences = {
+	roundOne: [],
+	roundTwo: [],
+	roundThree: [],
+};
 
 /**
  * This function receives an array of coordinates relative to positions in the slot machine's matrix.
@@ -80,9 +84,9 @@ const slotMachineCadences: RoundsCadences = { roundOne: [], roundTwo: [], roundT
  * @param symbols Array<SlotCoordinate> positions of the special symbols. Example: [{ column: 0, row: 2 }, { column: 2, row: 3 }]
  * @returns SlotCadence Array of numbers representing the slot machine stop cadence.
  */
-function slotCadence(symbols: Array<SlotCoordinate>): SlotCadence {
-  // Magic
-  return [];
+export default function slotCadence(symbols: Array<SlotCoordinate>): SlotCadence {
+	// Magic
+	return [];
 }
 
 /**
@@ -91,11 +95,15 @@ function slotCadence(symbols: Array<SlotCoordinate>): SlotCadence {
  * @return RoundsCadences has all cadences for each game round.
  */
 function handleCadences(rounds: RoundsSymbols): RoundsCadences {
-  slotMachineCadences.roundOne = slotCadence(rounds.roundOne.specialSymbols);
-  slotMachineCadences.roundTwo = slotCadence(rounds.roundTwo.specialSymbols);
-  slotMachineCadences.roundThree = slotCadence(rounds.roundThree.specialSymbols);
+	slotMachineCadences.roundOne = slotCadence(rounds.roundOne.specialSymbols);
+	slotMachineCadences.roundTwo = slotCadence(rounds.roundTwo.specialSymbols);
+	slotMachineCadences.roundThree = slotCadence(
+		rounds.roundThree.specialSymbols,
+	);
 
-  return slotMachineCadences;
+	return slotMachineCadences;
 }
 
-console.log('CADENCES: ', handleCadences(gameRounds));
+console.log("CADENCES: ", handleCadences(gameRounds));
+
+export {handleCadences}
