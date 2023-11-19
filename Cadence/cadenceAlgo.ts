@@ -1,3 +1,5 @@
+// This was first iteration of cadence algorithm
+
 import { handleCadences } from "./SlotMachineCadence";
 
 const anticipatorConfig = {
