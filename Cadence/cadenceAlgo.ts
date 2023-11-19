@@ -1,3 +1,5 @@
+import { handleCadences } from "./SlotMachineCadence";
+
 const anticipatorConfig = {
 	columnSize: 5,
 	minToAnticipate: 2,
@@ -11,11 +13,34 @@ type SlotCoordinate = {
 	row: number;
 };
 
+
 const mockSpecialSymbols = [
 	{ column: 0, row: 2 },
 	{ column: 1, row: 3 },
 	{ column: 3, row: 4 },
 ];
+
+const roundSymbols = {
+	roundOne: {
+		specialSymbols: [
+			{ column: 0, row: 2 },
+			{ column: 1, row: 3 },
+			{ column: 3, row: 4 },
+		],
+	},
+	roundTwo: {
+		specialSymbols: [
+			{ column: 0, row: 2 },
+			{ column: 0, row: 3 },
+		],
+	},
+	roundThree: {
+		specialSymbols: [
+			{ column: 4, row: 2 },
+			{ column: 4, row: 3 },
+		],
+	},
+};
 
 type SpecialSymbol = { specialSymbols: Array<SlotCoordinate> };
 
@@ -66,4 +91,6 @@ function findSymbols(specialSymbols: any) {
 	return result;
 }
 
-console.log(calcCadence(mockSpecialSymbols));
+console.log(handleCadences(roundSymbols));
+
+// console.log(calcCadence(mockSpecialSymbols));
